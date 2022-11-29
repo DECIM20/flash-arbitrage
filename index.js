@@ -4,7 +4,7 @@ const fs = require("fs")
 const app = express()
 require("dotenv").config()
 
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 4040
 
 const axios = require("axios")
 
