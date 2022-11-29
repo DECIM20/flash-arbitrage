@@ -4,7 +4,7 @@ const fs = require("fs")
 const app = express()
 require("dotenv").config()
 
-const port = process.env.PORT || 4040
+const port = process.env.PORT || 4000
 
 const axios = require("axios")
 
@@ -195,42 +195,42 @@ const amountOutFrontendSUSHI_USDC_IN_WMATIC2 = ethers.utils.formatUnits(amountsO
         let netProfit = grossProfit - ((0.0005*amountInFrontend) + 0.05 );
         console.log('netProfit',netProfit);
 
-        let arbitrageLog ;
+        // let arbitrageLog ;
 
 
-        if (netProfit > 0) {
+        // if (netProfit > 0) {
         
-            console.log("----ARBITRAGE OPPERETUNITY FOUND------------");
+        //     console.log("----ARBITRAGE OPPERETUNITY FOUND------------");
 
-            arbitrageInformationLog = "ARBITRAGE OPPERETUNITY FOUND";
+        //     arbitrageInformationLog = "ARBITRAGE OPPERETUNITY FOUND";
 
-            //console.log('arbitrageInformationLog' , arbitrageInformationLog);
+        //     //console.log('arbitrageInformationLog' , arbitrageInformationLog);
         
-          // Execute Flash Loan
+        //   // Execute Flash Loan
 
-            const flash_params = {
-                token0: ADDRESS_FROM_MATIC_POLY_MAIN,
-                token1: ADDRESS_TO_USDC_POLY_MAIN,
-                fee1: 500, // flash from the 0.05% fee pool 
-                amount0: ethers.utils.parseEther('amountInFrontend'), // flash borrow this much WMATIC  
-                amount1: 0, // flash borrow 0 USDC
-              };
+        //     const flash_params = {
+        //         token0: ADDRESS_FROM_MATIC_POLY_MAIN,
+        //         token1: ADDRESS_TO_USDC_POLY_MAIN,
+        //         fee1: 500, // flash from the 0.05% fee pool 
+        //         amount0: ethers.utils.parseEther('amountInFrontend'), // flash borrow this much WMATIC  
+        //         amount1: 0, // flash borrow 0 USDC
+        //       };
 
-              tx = await flash_contract.connect(loanInitiator).initFlash(flash_params);
-              await tx.wait();
-              console.log('tx' , tx);
+        //       tx = await flash_contract.connect(loanInitiator).initFlash(flash_params);
+        //       await tx.wait();
+        //       console.log('tx' , tx);
             
               
 
         
 
-        } else {
+        // } else {
  
-            console.log("----NO ARBITRAGE OPPERETUNITY FOUND------------");
-            arbitrageInformationLog = "NO ARBITRAGE OPPERETUNITY FOUND";
-           // console.log('arbitrageInformationLog' , arbitrageInformationLog);
+        //     console.log("----NO ARBITRAGE OPPERETUNITY FOUND------------");
+        //     arbitrageInformationLog = "NO ARBITRAGE OPPERETUNITY FOUND";
+        //    // console.log('arbitrageInformationLog' , arbitrageInformationLog);
 
-        }
+        // }
 
 
 
@@ -242,8 +242,8 @@ const obj = {
     UNIV3BUYUSDC: amount,
     SUSHISELLUSDCINMATIC: amountOutFrontendSUSHI_USDC_IN_WMATIC2,
     SUSHISELLUSDCINUSDC: amountOutFrontendSUSHI_USDC_IN_WMATIC2 * perunitMATICbuyprice ,
-    SUSHIBUYUSDC: amountOutFrontendSUSHI_WMATIC_IN_USDC,
-    arbitrageInformationLog : arbitrageInformationLog
+    SUSHIBUYUSDC: amountOutFrontendSUSHI_WMATIC_IN_USDC
+    //arbitrageInformationLog : arbitrageInformationLog
    // UNIV3SELLUSDCINMATIC: amount1,
     //UNIV3SELLUSDCINUSDC: amount1* perunitMATICbuyprice,
   };
